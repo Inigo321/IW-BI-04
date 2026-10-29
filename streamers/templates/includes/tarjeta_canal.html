@@ -1,0 +1,9 @@
+{# Espera la variable "canal". Opcional: ocultar_categoria=True #}
+<li class="tarjeta-canal">
+    <span class="avatar" aria-hidden="true">{{ canal.nombre|slice:":1"|upper }}</span>
+    <h3><a href="{% url 'canal_detail' canal.pk %}">{{ canal.nombre }}</a></h3>
+    {% if not ocultar_categoria %}
+    <p><a class="etiqueta" href="{% url 'categoria_detail' canal.categoria.pk %}">{{ canal.categoria.nombre }}</a></p>
+    {% endif %}
+    <p class="seguidores"><strong>{{ canal.seguidores }}</strong> seguidores</p>
+</li>

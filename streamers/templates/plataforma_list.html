@@ -1,0 +1,24 @@
+{% extends "base_listado.html" %}
+
+{% block titulo %}Plataformas | Streamers United{% endblock %}
+{% block encabezado %}Plataformas{% endblock %}
+{% block intro %}<p class="intro">Un mismo canal puede emitir en varias plataformas. Entra en una para ver quién emite en ella.</p>{% endblock %}
+{% block subtitulo %}Todas las plataformas ({{ plataforma_list|length }}){% endblock %}
+
+{% block elementos %}
+{% if plataforma_list %}
+<ul class="tarjetas">
+    {% for plataforma in plataforma_list %}
+    <li class="tarjeta-simple">
+        <h3><a href="{% url 'plataforma_detail' plataforma.pk %}">{{ plataforma.nombre }}</a></h3>
+        <p class="descripcion">{{ plataforma.descripcion|truncatewords:15 }}</p>
+        {% with total=plataforma.canales.count %}
+        <p><span class="etiqueta">{{ total }} canal{{ total|pluralize:"es" }}</span></p>
+        {% endwith %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="vacio">No hay plataformas registradas todavía.</p>
+{% endif %}
+{% endblock %}

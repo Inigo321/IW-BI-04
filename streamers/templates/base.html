@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}Streamers United{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header id="cabecera">
+    <div class="centrado">
+        <p class="logo"><a href="{% url 'portada' %}"><span class="directo" aria-hidden="true"></span>Streamers United</a></p>
+        <p class="eslogan">Canales, categorías y plataformas de streaming en un solo sitio</p>
+        <nav id="menu">
+            <ul>
+                <li><a href="{% url 'portada' %}"{% if request.resolver_match.url_name == 'portada' %} class="activo"{% endif %}>Portada</a></li>
+                <li><a href="{% url 'canal_list' %}"{% if 'canal' in request.resolver_match.url_name %} class="activo"{% endif %}>Canales</a></li>
+                <li><a href="{% url 'categoria_list' %}"{% if 'categoria' in request.resolver_match.url_name %} class="activo"{% endif %}>Categorías</a></li>
+                <li><a href="{% url 'plataforma_list' %}"{% if 'plataforma' in request.resolver_match.url_name %} class="activo"{% endif %}>Plataformas</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="centrado">
+    <main id="principal">
+        {% block contenido %}{% endblock %}
+    </main>
+
+    <aside id="lateral">
+        {% block lateral %}
+        <section>
+            <h2>Sobre el proyecto</h2>
+            <p>Streamers United reúne creadores de contenido y los clasifica por categoría y por las plataformas en las que emiten.</p>
+        </section>
+        <section>
+            <h2>Explora</h2>
+            <ul>
+                <li><a href="{% url 'canal_list' %}">Todos los canales</a></li>
+                <li><a href="{% url 'categoria_list' %}">Todas las categorías</a></li>
+                <li><a href="{% url 'plataforma_list' %}">Todas las plataformas</a></li>
+            </ul>
+        </section>
+        {% endblock %}
+    </aside>
+</div>
+
+<footer id="pie">
+    <div class="centrado">
+        <p>Streamers United &copy; {% now "Y" %} &ndash; Proyecto de Ingeniería Web</p>
+    </div>
+</footer>
+
+</body>
+</html>

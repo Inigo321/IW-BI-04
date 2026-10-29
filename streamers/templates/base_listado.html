@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{# Nivel 2: estructura común de las páginas de listado #}
+{% block contenido %}
+<section>
+    <h1>{% block encabezado %}{% endblock %}</h1>
+    {% block intro %}{% endblock %}
+    <section>
+        <h2>{% block subtitulo %}{% endblock %}</h2>
+        {% block elementos %}{% endblock %}
+    </section>
+</section>
+{% endblock %}

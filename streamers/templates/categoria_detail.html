@@ -1,0 +1,27 @@
+{% extends "base_detalle.html" %}
+
+{% block titulo %}{{ categoria.nombre }} | Streamers United{% endblock %}
+
+{% block cabecera_detalle %}
+    <h1>{{ categoria.nombre }}</h1>
+    {% if categoria.descripcion %}
+    <p class="intro">{{ categoria.descripcion }}</p>
+    {% endif %}
+{% endblock %}
+
+{% block cuerpo_detalle %}
+<section>
+    <h2>Canales de esta categoría</h2>
+    {% with canales=categoria.canales.all %}
+    {% if canales %}
+    <ul class="tarjetas">
+        {% for canal in canales %}
+            {% include "includes/tarjeta_canal.html" with ocultar_categoria=True %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="vacio">Todavía no hay canales en esta categoría.</p>
+    {% endif %}
+    {% endwith %}
+</section>
+{% endblock %}

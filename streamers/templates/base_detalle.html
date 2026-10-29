@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{# Nivel 2: estructura común de las páginas de detalle #}
+{% block contenido %}
+<article class="detalle">
+    <header>
+        {% block cabecera_detalle %}{% endblock %}
+    </header>
+    {% block cuerpo_detalle %}{% endblock %}
+</article>
+{% endblock %}

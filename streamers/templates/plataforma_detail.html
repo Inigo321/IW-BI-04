@@ -1,0 +1,27 @@
+{% extends "base_detalle.html" %}
+
+{% block titulo %}{{ plataforma.nombre }} | Streamers United{% endblock %}
+
+{% block cabecera_detalle %}
+    <h1>{{ plataforma.nombre }}</h1>
+    {% if plataforma.descripcion %}
+    <p class="intro">{{ plataforma.descripcion }}</p>
+    {% endif %}
+{% endblock %}
+
+{% block cuerpo_detalle %}
+<section>
+    <h2>Canales que emiten en {{ plataforma.nombre }}</h2>
+    {% with canales=plataforma.canales.all %}
+    {% if canales %}
+    <ul class="tarjetas">
+        {% for canal in canales %}
+            {% include "includes/tarjeta_canal.html" %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="vacio">Todavía no hay canales en esta plataforma.</p>
+    {% endif %}
+    {% endwith %}
+</section>
+{% endblock %}

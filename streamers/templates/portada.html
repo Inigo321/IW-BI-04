@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block titulo %}Portada | Streamers United{% endblock %}
+
+{% block contenido %}
+<section class="presentacion">
+    <h1>Streamers United</h1>
+    <p class="intro">Descubre canales de streaming y creadores de contenido, ordenados por categoría y por las plataformas en las que emiten: Twitch, Kick, YouTube, TikTok Live y más.</p>
+    <p>
+        <a class="boton" href="{% url 'canal_list' %}">Ver canales</a>
+        <a class="boton" href="{% url 'categoria_list' %}">Ver categorías</a>
+        <a class="boton" href="{% url 'plataforma_list' %}">Ver plataformas</a>
+    </p>
+</section>
+
+<section>
+    <h2>Un canal destacado de cada categoría</h2>
+    <p class="descripcion">En cada categoría mostramos el canal con más seguidores.</p>
+    {% if destacados %}
+    <ul class="tarjetas">
+        {% for canal in destacados %}
+            {% include "includes/tarjeta_canal.html" %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="vacio">Todavía no hay canales. Añade categorías y canales desde la administración de Django.</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base_detalle.html" %}
+
+{% block titulo %}{{ canal.nombre }} | Streamers United{% endblock %}
+
+{% block cabecera_detalle %}
+    <span class="avatar avatar-grande" aria-hidden="true">{{ canal.nombre|slice:":1"|upper }}</span>
+    <h1>{{ canal.nombre }}</h1>
+    <p class="descripcion">Canal de la categoría {{ canal.categoria.nombre }}</p>
+{% endblock %}
+
+{% block cuerpo_detalle %}
+<section>
+    <h2>Información del canal</h2>
+    <dl class="datos">
+        <dt>Categoría</dt>
+        <dd><a href="{% url 'categoria_detail' canal.categoria.pk %}">{{ canal.categoria.nombre }}</a></dd>
+        <dt>Seguidores</dt>
+        <dd>{{ canal.seguidores }}</dd>
+    </dl>
+    {% if canal.descripcion %}
+    <p>{{ canal.descripcion|linebreaksbr }}</p>
+    {% endif %}
+</section>
+
+<section>
+    <h2>Creador</h2>
+    {% if canal.creador %}
+    <p><strong>{{ canal.creador.nombre }}</strong></p>
+    {% if canal.creador.biografia %}<p>{{ canal.creador.biografia|linebreaksbr }}</p>{% endif %}
+    {% else %}
+    <p class="vacio">No hay un creador asociado a este canal.</p>
+    {% endif %}
+</section>
+
+<section>
+    <h2>Plataformas en las que emite</h2>
+    {% with plataformas=canal.plataformas.all %}
+    {% if plataformas %}
+    <ul class="lista-etiquetas">
+        {% for plataforma in plataformas %}
+        <li><a class="etiqueta" href="{% url 'plataforma_detail' plataforma.pk %}">{{ plataforma.nombre }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="vacio">Este canal no tiene plataformas asociadas.</p>
+    {% endif %}
+    {% endwith %}
+</section>
+{% endblock %}

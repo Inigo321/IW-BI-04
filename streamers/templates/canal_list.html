@@ -1,0 +1,18 @@
+{% extends "base_listado.html" %}
+
+{% block titulo %}Canales | Streamers United{% endblock %}
+{% block encabezado %}Canales{% endblock %}
+{% block intro %}<p class="intro">Elige un canal para ver su categoría y las plataformas en las que emite.</p>{% endblock %}
+{% block subtitulo %}Todos los canales ({{ canal_list|length }}){% endblock %}
+
+{% block elementos %}
+{% if canal_list %}
+<ul class="tarjetas">
+    {% for canal in canal_list %}
+        {% include "includes/tarjeta_canal.html" %}
+    {% endfor %}
+</ul>
+{% else %}
+<p class="vacio">No hay canales registrados todavía.</p>
+{% endif %}
+{% endblock %}

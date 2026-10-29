@@ -1,0 +1,305 @@
+[
+  {
+    "model": "streamers.categoria",
+    "pk": 1,
+    "fields": {
+      "nombre": "Gaming",
+      "descripcion": "Partidas en directo, torneos y speedruns."
+    }
+  },
+  {
+    "model": "streamers.categoria",
+    "pk": 2,
+    "fields": {
+      "nombre": "Charla",
+      "descripcion": "Tertulias, debates y conversación con el chat."
+    }
+  },
+  {
+    "model": "streamers.categoria",
+    "pk": 3,
+    "fields": {
+      "nombre": "Música",
+      "descripcion": "Directos musicales, producción y DJ sets."
+    }
+  },
+  {
+    "model": "streamers.categoria",
+    "pk": 4,
+    "fields": {
+      "nombre": "Cocina",
+      "descripcion": "Recetas en directo y retos gastronómicos."
+    }
+  },
+  {
+    "model": "streamers.categoria",
+    "pk": 5,
+    "fields": {
+      "nombre": "Deportes",
+      "descripcion": "Análisis, retransmisiones y entrenamientos."
+    }
+  },
+  {
+    "model": "streamers.plataforma",
+    "pk": 1,
+    "fields": {
+      "nombre": "Twitch",
+      "descripcion": "Plataforma de streaming en directo centrada en videojuegos y comunidad.",
+      "url": "https://www.twitch.tv"
+    }
+  },
+  {
+    "model": "streamers.plataforma",
+    "pk": 2,
+    "fields": {
+      "nombre": "Kick",
+      "descripcion": "Plataforma de streaming en directo surgida en 2022.",
+      "url": "https://kick.com"
+    }
+  },
+  {
+    "model": "streamers.plataforma",
+    "pk": 3,
+    "fields": {
+      "nombre": "YouTube",
+      "descripcion": "Plataforma de vídeo de Google con emisiones en directo.",
+      "url": "https://www.youtube.com"
+    }
+  },
+  {
+    "model": "streamers.plataforma",
+    "pk": 4,
+    "fields": {
+      "nombre": "TikTok Live",
+      "descripcion": "Directos dentro de la aplicación de vídeos cortos TikTok.",
+      "url": "https://www.tiktok.com"
+    }
+  },
+  {
+    "model": "streamers.canal",
+    "pk": 1,
+    "fields": {
+      "nombre": "PixelRayo",
+      "descripcion": "Speedruns de clásicos y retos imposibles.",
+      "seguidores": 842000,
+      "categoria": 1,
+      "plataformas": [
+        1,
+        3
+      ]
+    }
+  },
+  {
+    "model": "streamers.canal",
+    "pk": 2,
+    "fields": {
+      "nombre": "LaPartidaEterna",
+      "descripcion": "Rol y estrategia por turnos, partidas de horas.",
+      "seguidores": 310500,
+      "categoria": 1,
+      "plataformas": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "streamers.canal",
+    "pk": 3,
+    "fields": {
+      "nombre": "Noctámbulos",
+      "descripcion": "Charlas nocturnas con el chat sobre cualquier tema.",
+      "seguidores": 528300,
+      "categoria": 2,
+      "plataformas": [
+        1,
+        2,
+        4
+      ]
+    }
+  },
+  {
+    "model": "streamers.canal",
+    "pk": 4,
+    "fields": {
+      "nombre": "CaféConPreguntas",
+      "descripcion": "Entrevistas en directo a invitados.",
+      "seguidores": 120900,
+      "categoria": 2,
+      "plataformas": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "streamers.canal",
+    "pk": 5,
+    "fields": {
+      "nombre": "Teclas y Cuerdas",
+      "descripcion": "Piano, guitarra y peticiones del chat.",
+      "seguidores": 265400,
+      "categoria": 3,
+      "plataformas": [
+        1,
+        3
+      ]
+    }
+  },
+  {
+    "model": "streamers.canal",
+    "pk": 6,
+    "fields": {
+      "nombre": "BeatLab",
+      "descripcion": "Producción musical en directo desde cero.",
+      "seguidores": 98700,
+      "categoria": 3,
+      "plataformas": [
+        2,
+        4
+      ]
+    }
+  },
+  {
+    "model": "streamers.canal",
+    "pk": 7,
+    "fields": {
+      "nombre": "Fogón Abierto",
+      "descripcion": "Recetas caseras paso a paso.",
+      "seguidores": 187200,
+      "categoria": 4,
+      "plataformas": [
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "streamers.canal",
+    "pk": 8,
+    "fields": {
+      "nombre": "Pizza Nocturna",
+      "descripcion": "Retos de cocina rápida a medianoche.",
+      "seguidores": 75600,
+      "categoria": 4,
+      "plataformas": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "streamers.canal",
+    "pk": 9,
+    "fields": {
+      "nombre": "Tercer Tiempo",
+      "descripcion": "Análisis de fútbol tras cada jornada.",
+      "seguidores": 402100,
+      "categoria": 5,
+      "plataformas": [
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "streamers.canal",
+    "pk": 10,
+    "fields": {
+      "nombre": "Kilómetro Cero",
+      "descripcion": "Entrenamientos de running en directo.",
+      "seguidores": 54300,
+      "categoria": 5,
+      "plataformas": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "streamers.creador",
+    "pk": 1,
+    "fields": {
+      "nombre": "Alex Rayo",
+      "biografia": "Creador de PixelRayo, especializado en speedruns y juegos clásicos.",
+      "canal": 1
+    }
+  },
+  {
+    "model": "streamers.creador",
+    "pk": 2,
+    "fields": {
+      "nombre": "Marta Larrinaga",
+      "biografia": "Presenta partidas de rol y estrategia en LaPartidaEterna.",
+      "canal": 2
+    }
+  },
+  {
+    "model": "streamers.creador",
+    "pk": 3,
+    "fields": {
+      "nombre": "Nora Vidal",
+      "biografia": "Conversa cada noche con su comunidad en Noctámbulos.",
+      "canal": 3
+    }
+  },
+  {
+    "model": "streamers.creador",
+    "pk": 4,
+    "fields": {
+      "nombre": "Iker Arana",
+      "biografia": "Entrevista a invitados y responde preguntas en CaféConPreguntas.",
+      "canal": 4
+    }
+  },
+  {
+    "model": "streamers.creador",
+    "pk": 5,
+    "fields": {
+      "nombre": "Leire Campos",
+      "biografia": "Interpreta piano y guitarra en Teclas y Cuerdas.",
+      "canal": 5
+    }
+  },
+  {
+    "model": "streamers.creador",
+    "pk": 6,
+    "fields": {
+      "nombre": "Dani Sola",
+      "biografia": "Produce música electrónica en directo en BeatLab.",
+      "canal": 6
+    }
+  },
+  {
+    "model": "streamers.creador",
+    "pk": 7,
+    "fields": {
+      "nombre": "Ane Etxeberria",
+      "biografia": "Comparte recetas caseras paso a paso en Fogón Abierto.",
+      "canal": 7
+    }
+  },
+  {
+    "model": "streamers.creador",
+    "pk": 8,
+    "fields": {
+      "nombre": "Bruno Salas",
+      "biografia": "Propone retos de cocina rápida en Pizza Nocturna.",
+      "canal": 8
+    }
+  },
+  {
+    "model": "streamers.creador",
+    "pk": 9,
+    "fields": {
+      "nombre": "Unai Merino",
+      "biografia": "Analiza fútbol y actualidad deportiva en Tercer Tiempo.",
+      "canal": 9
+    }
+  },
+  {
+    "model": "streamers.creador",
+    "pk": 10,
+    "fields": {
+      "nombre": "Sara Muñoz",
+      "biografia": "Organiza entrenamientos de running en Kilómetro Cero.",
+      "canal": 10
+    }
+  }
+]

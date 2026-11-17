@@ -1,0 +1,12 @@
+{# Pinta los campos de "form" uno a uno, con su ayuda y sus errores #}
+{% if form.non_field_errors %}
+<div class="errores-generales" role="alert">{{ form.non_field_errors }}</div>
+{% endif %}
+{% for field in form %}
+<div class="campo{% if field.errors %} campo-con-error{% endif %}">
+    {{ field.label_tag }}
+    {{ field }}
+    {% if field.help_text %}<p class="ayuda">{{ field.help_text }}</p>{% endif %}
+    {% if field.errors %}<div class="error-campo">{{ field.errors }}</div>{% endif %}
+</div>
+{% endfor %}

@@ -1,24 +1,40 @@
-{% load static %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block titulo %}Streamers United{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/streamers.js' %}" defer></script>
 </head>
 <body>
 
 <header id="cabecera">
     <div class="centrado">
+        {# Selector de idioma (E4a - opción 6) #}
+        <form class="selector-idioma" action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+            <label for="idioma">{% translate "Idioma" %}</label>
+            <select id="idioma" name="language">
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as idiomas %}
+                {% for idioma in idiomas %}
+                <option value="{{ idioma.code }}"{% if idioma.code == LANGUAGE_CODE %} selected{% endif %}>{{ idioma.name_local|capfirst }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">{% translate "Cambiar" %}</button>
+        </form>
         <p class="logo"><a href="{% url 'portada' %}"><span class="directo" aria-hidden="true"></span>Streamers United</a></p>
-        <p class="eslogan">Canales, categorías y plataformas de streaming en un solo sitio</p>
+        <p class="eslogan">{% translate "Canales, categorías y plataformas de streaming en un solo sitio" %}</p>
         <nav id="menu">
             <ul>
-                <li><a href="{% url 'portada' %}"{% if request.resolver_match.url_name == 'portada' %} class="activo"{% endif %}>Portada</a></li>
-                <li><a href="{% url 'canal_list' %}"{% if 'canal' in request.resolver_match.url_name %} class="activo"{% endif %}>Canales</a></li>
-                <li><a href="{% url 'categoria_list' %}"{% if 'categoria' in request.resolver_match.url_name %} class="activo"{% endif %}>Categorías</a></li>
-                <li><a href="{% url 'plataforma_list' %}"{% if 'plataforma' in request.resolver_match.url_name %} class="activo"{% endif %}>Plataformas</a></li>
+                <li><a href="{% url 'portada' %}"{% if request.resolver_match.url_name == 'portada' %} class="activo"{% endif %}>{% translate "Portada" %}</a></li>
+                <li><a href="{% url 'canal_list' %}"{% if 'canal' in request.resolver_match.url_name %} class="activo"{% endif %}>{% translate "Canales" %}</a></li>
+                <li><a href="{% url 'categoria_list' %}"{% if 'categoria' in request.resolver_match.url_name %} class="activo"{% endif %}>{% translate "Categorías" %}</a></li>
+                <li><a href="{% url 'plataforma_list' %}"{% if 'plataforma' in request.resolver_match.url_name %} class="activo"{% endif %}>{% translate "Plataformas" %}</a></li>
             </ul>
         </nav>
     </div>
@@ -26,22 +42,45 @@
 
 <div class="centrado">
     <main id="principal">
+        {% if messages %}
+        <div class="mensajes" role="status" data-txt-cerrar="{% translate 'Cerrar mensaje' %}">
+            {% for message in messages %}
+            <p class="mensaje mensaje-{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block contenido %}{% endblock %}
     </main>
 
     <aside id="lateral">
         {% block lateral %}
         <section>
-            <h2>Sobre el proyecto</h2>
-            <p>Streamers United reúne creadores de contenido y los clasifica por categoría y por las plataformas en las que emiten.</p>
+            <h2>{% translate "Sobre el proyecto" %}</h2>
+            <p>{% translate "Streamers United reúne creadores de contenido y los clasifica por categoría y por las plataformas en las que emiten." %}</p>
         </section>
         <section>
-            <h2>Explora</h2>
+            <h2>{% translate "Explora" %}</h2>
             <ul>
-                <li><a href="{% url 'canal_list' %}">Todos los canales</a></li>
-                <li><a href="{% url 'categoria_list' %}">Todas las categorías</a></li>
-                <li><a href="{% url 'plataforma_list' %}">Todas las plataformas</a></li>
+                <li><a href="{% url 'canal_list' %}">{% translate "Todos los canales" %}</a></li>
+                {% if perms.streamers.add_canal %}
+                <li><a href="{% url 'canal_create' %}">{% translate "Añadir un canal" %}</a></li>
+                {% endif %}
+                <li><a href="{% url 'categoria_list' %}">{% translate "Todas las categorías" %}</a></li>
+                <li><a href="{% url 'plataforma_list' %}">{% translate "Todas las plataformas" %}</a></li>
             </ul>
+        </section>
+        <section>
+            <h2>{% translate "Tu cuenta" %}</h2>
+            {% if user.is_authenticated %}
+            <p>{% blocktranslate with usuario=user.get_username %}Has iniciado sesión como {{ usuario }}.{% endblocktranslate %}</p>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="boton boton-secundario">{% translate "Cerrar sesión" %}</button>
+            </form>
+            {% else %}
+            <p>{% translate "Inicia sesión para añadir o editar canales." %}</p>
+            <p><a class="boton" href="{% url 'login' %}?next={{ request.path|urlencode }}">{% translate "Iniciar sesión" %}</a></p>
+            {% endif %}
         </section>
         {% endblock %}
     </aside>
@@ -49,7 +88,7 @@
 
 <footer id="pie">
     <div class="centrado">
-        <p>Streamers United &copy; {% now "Y" %} &ndash; Proyecto de Ingeniería Web</p>
+        <p>Streamers United &copy; {% now "Y" %} &ndash; {% translate "Proyecto de Ingeniería Web" %}</p>
     </div>
 </footer>
 

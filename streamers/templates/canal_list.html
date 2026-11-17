@@ -1,11 +1,29 @@
 {% extends "base_listado.html" %}
+{% load i18n %}
 
-{% block titulo %}Canales | Streamers United{% endblock %}
-{% block encabezado %}Canales{% endblock %}
-{% block intro %}<p class="intro">Elige un canal para ver su categoría y las plataformas en las que emite.</p>{% endblock %}
-{% block subtitulo %}Todos los canales ({{ canal_list|length }}){% endblock %}
+{% block titulo %}{% translate "Canales" %} | Streamers United{% endblock %}
+{% block encabezado %}{% translate "Canales" %}{% endblock %}
+{% block intro %}
+<p class="intro">{% translate "Elige un canal para ver su categoría y las plataformas en las que emite." %}</p>
+<form class="buscador" method="get" action="{% url 'canal_list' %}" role="search"
+      data-api="{% url 'api_canales' %}"
+      data-txt-resultados="{% translate 'Resultados para «{q}» ({total})' %}"
+      data-txt-todos="{% translate 'Todos los canales ({total})' %}"
+      data-txt-sin-coincidencias="{% translate 'Ningún canal coincide con la búsqueda.' %}"
+      data-txt-vacio="{% translate 'No hay canales registrados todavía.' %}"
+      data-txt-seguidores="{% translate 'seguidores' %}">
+    <label for="buscar-canal">{% translate "Buscar canal" %}</label>
+    <input type="search" id="buscar-canal" name="q" value="{{ q }}" placeholder="{% translate 'Escribe parte del nombre...' %}" autocomplete="off">
+    <button type="submit" class="boton">{% translate "Buscar" %}</button>
+</form>
+{% if perms.streamers.add_canal %}
+<p><a class="boton boton-secundario" href="{% url 'canal_create' %}">+ {% translate "Añadir canal" %}</a></p>
+{% endif %}
+{% endblock %}
+{% block subtitulo %}<span id="resumen-busqueda">{% with total=canal_list|length %}{% if q %}{% blocktranslate %}Resultados para «{{ q }}» ({{ total }}){% endblocktranslate %}{% else %}{% blocktranslate %}Todos los canales ({{ total }}){% endblocktranslate %}{% endif %}{% endwith %}</span>{% endblock %}
 
 {% block elementos %}
+<div id="resultados" aria-live="polite">
 {% if canal_list %}
 <ul class="tarjetas">
     {% for canal in canal_list %}
@@ -13,6 +31,7 @@
     {% endfor %}
 </ul>
 {% else %}
-<p class="vacio">No hay canales registrados todavía.</p>
+<p class="vacio">{% if q %}{% translate "Ningún canal coincide con la búsqueda." %}{% else %}{% translate "No hay canales registrados todavía." %}{% endif %}</p>
 {% endif %}
+</div>
 {% endblock %}

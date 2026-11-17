@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block titulo %}{% translate "Iniciar sesión" %} | Streamers United{% endblock %}
+
+{% block contenido %}
+<section>
+    <h1>{% translate "Iniciar sesión" %}</h1>
+    <p class="intro">{% translate "Para añadir, editar o borrar canales necesitas una cuenta con permisos." %}</p>
+    <form class="formulario" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {% include "includes/campos_formulario.html" %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <p><button type="submit" class="boton">{% translate "Entrar" %}</button></p>
+    </form>
+</section>
+{% endblock %}

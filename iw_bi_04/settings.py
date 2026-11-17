@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,13 +22,32 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
+# SEGURIDAD (E4a - opción 7): los valores sensibles se leen de variables de
+# entorno. Si no existen, se usan valores de desarrollo para que el proyecto
+# funcione igual en clase con "python manage.py runserver".
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#l5xf5_$su7iu)%!@=%_wdpr9%g53km*t=2)lu5!k^sfxzbbau'
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-#l5xf5_$su7iu)%!@=%_wdpr9%g53km*t=2)lu5!k^sfxzbbau',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+    if host.strip()
+]
+CSRF_TRUSTED_ORIGINS = []
+
+# Despliegue en Render (E4a - opción 8): Render define esta variable con el
+# dominio público del servicio (por ejemplo streamers-united.onrender.com).
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    CSRF_TRUSTED_ORIGINS.append(f'https://{RENDER_EXTERNAL_HOSTNAME}')
 
 
 # Application definition
@@ -43,6 +65,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # i18n: elige el idioma de cada petición
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -50,12 +73,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# En producción, WhiteNoise sirve los archivos estáticos (va justo después de
+# SecurityMiddleware). En desarrollo los sirve "runserver", así no avisa de que
+# falta la carpeta "staticfiles" (que solo existe tras "collectstatic").
+if not DEBUG:
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
 ROOT_URLCONF = 'iw_bi_04.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # plantillas del admin personalizado
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,11 +102,13 @@ WSGI_APPLICATION = 'iw_bi_04.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
+# Por defecto SQLite. Si existe la variable DATABASE_URL (por ejemplo, una base
+# de datos PostgreSQL de Render), se usa esa en su lugar.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
+        conn_max_age=60,
+    )
 }
 
 
@@ -103,26 +134,83 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+from django.utils.translation import gettext_lazy as _  # noqa: E402
 
-TIME_ZONE = 'UTC'
+# Idioma por defecto e idiomas disponibles (E4a - opción 6)
+LANGUAGE_CODE = 'es'
+
+LANGUAGES = [
+    ('es', _('Español')),
+    ('en', _('Inglés')),
+]
+
+# Carpeta con las traducciones (locale/en/LC_MESSAGES/django.po y .mo)
+LOCALE_PATHS = [BASE_DIR / 'locale']
+
+TIME_ZONE = 'Europe/Madrid'
 
 USE_I18N = True
 
 USE_TZ = True
 
 
+# Inicio de sesión para los formularios públicos (E4a - opción 7, seguridad)
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'portada'
+LOGOUT_REDIRECT_URL = 'portada'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # destino de "collectstatic" en producción
+
+
+# Seguridad (E4a - opción 7) -------------------------------------------------
+# Comprobado con: python manage.py check --deploy
+
+# Siempre activas (no molestan en desarrollo)
+SECURE_CONTENT_TYPE_NOSNIFF = True        # el navegador no "adivina" tipos de archivo
+SECURE_REFERRER_POLICY = 'same-origin'    # no se envía la URL a otras webs
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
+X_FRAME_OPTIONS = 'DENY'                  # nadie puede meter la web en un <iframe>
+SESSION_COOKIE_HTTPONLY = True            # JavaScript no puede leer la cookie de sesión
+CSRF_COOKIE_HTTPONLY = True               # el token CSRF se lee del formulario, no de la cookie
+
+# Solo en producción (DEBUG=False), porque exigen HTTPS
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 60 * 60 * 24 * 30   # 30 días
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# Rendimiento (E4a - opción 7) -----------------------------------------------
+# - La conexión a la base de datos se reutiliza 60 s (conn_max_age en DATABASES).
+# - En producción, WhiteNoise sirve los estáticos comprimidos y con un nombre que
+#   incluye su hash, así el navegador puede guardarlos en caché sin caducidad.
+# - El resto de mejoras están en las consultas de streamers/views.py
+#   (select_related, prefetch_related y annotate para evitar el problema N+1).
+if not DEBUG:
+    STORAGES = {
+        'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+        'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
+    }
 
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
+# En desarrollo los correos se muestran en la consola; en producción se usa SMTP.
 MAILERS = {
     'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+        'BACKEND': (
+            'django.core.mail.backends.console.EmailBackend' if DEBUG
+            else 'django.core.mail.backends.smtp.EmailBackend'
+        ),
     },
 }

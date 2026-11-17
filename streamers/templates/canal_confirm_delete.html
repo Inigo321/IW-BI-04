@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block titulo %}{% blocktranslate with nombre=object.nombre %}Borrar {{ nombre }}{% endblocktranslate %} | Streamers United{% endblock %}
+
+{% block contenido %}
+<section>
+    <h1>{% blocktranslate with nombre=object.nombre %}Borrar «{{ nombre }}»{% endblocktranslate %}</h1>
+    <p class="intro">{% translate "¿Seguro que quieres borrar este canal? También se borrará su creador. Esta acción no se puede deshacer." %}</p>
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <button type="submit" class="boton boton-peligro">{% translate "Sí, borrar" %}</button>
+            <a class="boton boton-secundario" href="{% url 'canal_detail' object.pk %}">{% translate "Cancelar" %}</a>
+        </p>
+    </form>
+</section>
+{% endblock %}

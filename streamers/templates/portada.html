@@ -1,21 +1,22 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block titulo %}Portada | Streamers United{% endblock %}
+{% block titulo %}{% translate "Portada" %} | Streamers United{% endblock %}
 
 {% block contenido %}
 <section class="presentacion">
     <h1>Streamers United</h1>
-    <p class="intro">Descubre canales de streaming y creadores de contenido, ordenados por categoría y por las plataformas en las que emiten: Twitch, Kick, YouTube, TikTok Live y más.</p>
+    <p class="intro">{% translate "Descubre canales de streaming y creadores de contenido, ordenados por categoría y por las plataformas en las que emiten: Twitch, Kick, YouTube, TikTok Live y más." %}</p>
     <p>
-        <a class="boton" href="{% url 'canal_list' %}">Ver canales</a>
-        <a class="boton" href="{% url 'categoria_list' %}">Ver categorías</a>
-        <a class="boton" href="{% url 'plataforma_list' %}">Ver plataformas</a>
+        <a class="boton" href="{% url 'canal_list' %}">{% translate "Ver canales" %}</a>
+        <a class="boton" href="{% url 'categoria_list' %}">{% translate "Ver categorías" %}</a>
+        <a class="boton" href="{% url 'plataforma_list' %}">{% translate "Ver plataformas" %}</a>
     </p>
 </section>
 
 <section>
-    <h2>Un canal destacado de cada categoría</h2>
-    <p class="descripcion">En cada categoría mostramos el canal con más seguidores.</p>
+    <h2>{% translate "Un canal destacado de cada categoría" %}</h2>
+    <p class="descripcion">{% translate "En cada categoría mostramos el canal con más seguidores." %}</p>
     {% if destacados %}
     <ul class="tarjetas">
         {% for canal in destacados %}
@@ -23,7 +24,7 @@
         {% endfor %}
     </ul>
     {% else %}
-    <p class="vacio">Todavía no hay canales. Añade categorías y canales desde la administración de Django.</p>
+    <p class="vacio">{% translate "Todavía no hay canales. Añade categorías y canales desde la administración de Django." %}</p>
     {% endif %}
 </section>
 {% endblock %}

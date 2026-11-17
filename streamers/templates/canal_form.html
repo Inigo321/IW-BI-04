@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block titulo %}{% if object %}{% blocktranslate with nombre=object.nombre %}Editar {{ nombre }}{% endblocktranslate %}{% else %}{% translate "Nuevo canal" %}{% endif %} | Streamers United{% endblock %}
+
+{% block contenido %}
+<section>
+    <h1>{% if object %}{% blocktranslate with nombre=object.nombre %}Editar «{{ nombre }}»{% endblocktranslate %}{% else %}{% translate "Nuevo canal" %}{% endif %}</h1>
+    <form class="formulario" method="post" novalidate>
+        {% csrf_token %}
+        {% include "includes/campos_formulario.html" %}
+        <p>
+            <button type="submit" class="boton">{% translate "Guardar" %}</button>
+            <a class="boton boton-secundario" href="{% if object %}{% url 'canal_detail' object.pk %}{% else %}{% url 'canal_list' %}{% endif %}">{% translate "Cancelar" %}</a>
+        </p>
+    </form>
+</section>
+{% endblock %}

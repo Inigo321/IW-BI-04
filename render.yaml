@@ -1,0 +1,37 @@
+# Despliegue en Render (E4a - opción 8)
+# En Render: New > Blueprint > elegir este repositorio. Render lee este archivo
+# y crea el servicio web con todo configurado.
+services:
+  - type: web
+    name: streamers-united
+    runtime: python
+    plan: free
+    buildCommand: >-
+      pip install -r requirements.txt &&
+      python manage.py collectstatic --noinput &&
+      python manage.py migrate --noinput &&
+      python manage.py loaddata datos_ejemplo &&
+      python manage.py crear_roles --password "$DEMO_PASSWORD" &&
+      (python manage.py createsuperuser --noinput || true)
+    startCommand: gunicorn iw_bi_04.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.3
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true          # Render genera una clave larga y aleatoria
+      - key: DJANGO_ALLOWED_HOSTS
+        value: localhost
+      - key: WEB_CONCURRENCY
+        value: 2
+      # Usuario administrador que se crea al desplegar
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@example.com
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false                  # Render pide el valor al crear el servicio
+      # Contraseña de los usuarios de prueba (admincontenido, editor, revisor)
+      - key: DEMO_PASSWORD
+        sync: false

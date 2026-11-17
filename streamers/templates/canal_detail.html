@@ -1,39 +1,58 @@
 {% extends "base_detalle.html" %}
+{% load i18n %}
 
 {% block titulo %}{{ canal.nombre }} | Streamers United{% endblock %}
 
 {% block cabecera_detalle %}
     <span class="avatar avatar-grande" aria-hidden="true">{{ canal.nombre|slice:":1"|upper }}</span>
     <h1>{{ canal.nombre }}</h1>
-    <p class="descripcion">Canal de la categoría {{ canal.categoria.nombre }}</p>
+    <p class="descripcion">{% blocktranslate with categoria=canal.categoria.nombre %}Canal de la categoría {{ categoria }}{% endblocktranslate %}</p>
+    {% if perms.streamers.change_canal or perms.streamers.delete_canal %}
+    <p class="acciones">
+        {% if perms.streamers.change_canal %}<a class="boton boton-secundario" href="{% url 'canal_update' canal.pk %}">{% translate "Editar" %}</a>{% endif %}
+        {% if perms.streamers.delete_canal %}<a class="boton boton-peligro" href="{% url 'canal_delete' canal.pk %}">{% translate "Borrar" %}</a>{% endif %}
+    </p>
+    {% endif %}
 {% endblock %}
 
 {% block cuerpo_detalle %}
 <section>
-    <h2>Información del canal</h2>
+    <h2>{% translate "Información del canal" %}</h2>
     <dl class="datos">
-        <dt>Categoría</dt>
+        <dt>{% translate "Categoría" %}</dt>
         <dd><a href="{% url 'categoria_detail' canal.categoria.pk %}">{{ canal.categoria.nombre }}</a></dd>
-        <dt>Seguidores</dt>
-        <dd>{{ canal.seguidores }}</dd>
+        <dt>{% translate "Seguidores" %}</dt>
+        <dd><span id="contador-seguidores">{{ canal.seguidores }}</span></dd>
     </dl>
+    <form class="form-seguir" method="post" action="{% url 'canal_seguir' canal.pk %}"
+          data-txt-gracias="{% translate '¡Gracias por seguirlo!' %}"
+          data-txt-error="{% translate 'No se ha podido seguir. Inténtalo de nuevo.' %}"
+          data-txt-siguiendo="{% translate 'Siguiendo' %}">
+        {% csrf_token %}
+        {% if siguiendo %}
+        <button type="submit" class="boton boton-seguir" disabled>{% translate "Siguiendo" %}</button>
+        {% else %}
+        <button type="submit" class="boton boton-seguir">{% translate "Seguir canal" %}</button>
+        {% endif %}
+    </form>
     {% if canal.descripcion %}
     <p>{{ canal.descripcion|linebreaksbr }}</p>
     {% endif %}
 </section>
 
 <section>
-    <h2>Creador</h2>
+    <h2>{% translate "Creador" %}</h2>
     {% if canal.creador %}
     <p><strong>{{ canal.creador.nombre }}</strong></p>
     {% if canal.creador.biografia %}<p>{{ canal.creador.biografia|linebreaksbr }}</p>{% endif %}
+    {% if perms.streamers.change_creador %}<p><a href="{% url 'creador_update' canal.creador.pk %}">{% translate "Editar creador" %}</a></p>{% endif %}
     {% else %}
-    <p class="vacio">No hay un creador asociado a este canal.</p>
+    <p class="vacio">{% translate "No hay un creador asociado a este canal." %}{% if perms.streamers.add_creador %} <a href="{% url 'creador_create' canal.pk %}">{% translate "Añadir creador" %}</a>{% endif %}</p>
     {% endif %}
 </section>
 
 <section>
-    <h2>Plataformas en las que emite</h2>
+    <h2>{% translate "Plataformas en las que emite" %}</h2>
     {% with plataformas=canal.plataformas.all %}
     {% if plataformas %}
     <ul class="lista-etiquetas">
@@ -42,7 +61,7 @@
         {% endfor %}
     </ul>
     {% else %}
-    <p class="vacio">Este canal no tiene plataformas asociadas.</p>
+    <p class="vacio">{% translate "Este canal no tiene plataformas asociadas." %}</p>
     {% endif %}
     {% endwith %}
 </section>

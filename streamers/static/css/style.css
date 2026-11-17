@@ -318,3 +318,240 @@ dl.datos dd {
 #lateral section:last-child {
     margin-bottom: 0;
 }
+
+/* 9. Formularios (E4a - opción 3) ------------------------ */
+.formulario {
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #cfd2e6;
+}
+
+.campo {
+    margin-bottom: 18px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.campo input[type="text"],
+.campo input[type="number"],
+.campo input[type="search"],
+.campo select,
+.campo textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #cfd2e6;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: #3b2f9e;
+    outline: 2px solid #e1defa;
+}
+
+/* Casillas de las plataformas: en línea, sin negrita */
+.campo div label {
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+.campo ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.ayuda {
+    margin: 4px 0 0 0;
+    color: #5d5f7e;
+    font-size: 13px;
+}
+
+.campo-con-error input,
+.campo-con-error select,
+.campo-con-error textarea {
+    border-color: #e5384f;
+}
+
+.error-campo,
+.errores-generales {
+    color: #b3172c;
+    font-size: 14px;
+}
+
+.error-campo ul,
+.errores-generales ul {
+    margin: 4px 0 0 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+button.boton {
+    border: 0;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.boton-secundario {
+    background-color: #5d5f7e;
+}
+
+.boton-peligro {
+    background-color: #b3172c;
+}
+
+.boton-peligro:hover {
+    background-color: #7d0f1f;
+}
+
+.acciones {
+    margin-top: 10px;
+}
+
+/* 10. Mensajes ------------------------------------------- */
+.mensajes {
+    margin-bottom: 20px;
+}
+
+.mensaje {
+    position: relative;
+    margin: 0 0 8px 0;
+    padding: 12px 40px 12px 15px;
+    border-left: 6px solid #3b2f9e;
+    background-color: #e1defa;
+}
+
+.mensaje-success {
+    border-left-color: #1f8a4c;
+    background-color: #dff3e7;
+}
+
+.cerrar-mensaje {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    border: 0;
+    background: none;
+    color: #1d1b3a;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* 11. Buscador y efectos (E4a - opción 1) ---------------- */
+.buscador {
+    margin-bottom: 15px;
+}
+
+.buscador label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.buscador input {
+    width: 60%;
+    padding: 9px 10px;
+    border: 1px solid #cfd2e6;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+#resultados {
+    transition: opacity 0.2s;
+}
+
+#resultados.cargando {
+    opacity: 0.5;
+}
+
+.aparecer {
+    animation: aparecer 0.35s ease-out both;
+}
+
+.latido {
+    display: inline-block;
+    color: #e5384f;
+    font-weight: bold;
+    animation: latido 0.6s ease-out;
+}
+
+.desvanecer {
+    animation: desvanecer 0.4s ease-in forwards;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes latido {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+@keyframes desvanecer {
+    to { opacity: 0; transform: translateX(20px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aparecer,
+    .latido,
+    .desvanecer {
+        animation-duration: 0.01ms;
+    }
+}
+
+.form-seguir {
+    margin-bottom: 15px;
+}
+
+.boton-seguir:disabled {
+    background-color: #5d5f7e;
+    cursor: default;
+}
+
+/* Contraseña en el formulario de inicio de sesión */
+.campo input[type="password"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #cfd2e6;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+/* 12. Selector de idioma (E4a - opción 6) ---------------- */
+.selector-idioma {
+    float: right;
+    font-size: 13px;
+}
+
+.selector-idioma label {
+    margin-right: 4px;
+    color: #d9d5f7;
+}
+
+.selector-idioma select,
+.selector-idioma button {
+    padding: 3px 6px;
+    border: 1px solid #d9d5f7;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.selector-idioma button {
+    background-color: #e5384f;
+    border-color: #e5384f;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Categoria(models.Model):
@@ -40,6 +41,9 @@ class Canal(models.Model):
 
     def __str__(self):
         return self.nombre
+
+    def get_absolute_url(self):
+        return reverse('canal_detail', args=[self.pk])
 
 
 class Creador(models.Model):

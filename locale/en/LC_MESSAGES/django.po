@@ -1,0 +1,368 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Streamers United\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Proyecto de Ingeniería Web"
+msgstr "Web Engineering Project"
+
+msgid "Editar"
+msgstr "Edit"
+
+msgid "Borrar"
+msgstr "Delete"
+
+msgid "Información del canal"
+msgstr "Channel information"
+
+msgid "Categoría"
+msgstr "Category"
+
+msgid "Seguidores"
+msgstr "Followers"
+
+msgid "¡Gracias por seguirlo!"
+msgstr "Thanks for following!"
+
+msgid "No se ha podido seguir. Inténtalo de nuevo."
+msgstr "Could not follow. Please try again."
+
+msgid "Seguir canal"
+msgstr "Follow channel"
+
+msgid "Creador"
+msgstr "Creator"
+
+msgid "Editar creador"
+msgstr "Edit creator"
+
+msgid "No hay un creador asociado a este canal."
+msgstr "This channel has no creator yet."
+
+msgid "Añadir creador"
+msgstr "Add creator"
+
+msgid "Plataformas en las que emite"
+msgstr "Platforms it streams on"
+
+msgid "Este canal no tiene plataformas asociadas."
+msgstr "This channel has no platforms yet."
+
+#, python-format
+msgid "Canal de la categoría %(categoria)s"
+msgstr "Channel in the %(categoria)s category"
+
+msgid "Categorías"
+msgstr "Categories"
+
+msgid ""
+"Gaming, charla, música, cocina, deportes... Entra en una categoría para ver "
+"sus canales."
+msgstr ""
+"Gaming, talk shows, music, cooking, sports... Open a category to see its "
+"channels."
+
+msgid "No hay categorías registradas todavía."
+msgstr "There are no categories yet."
+
+#, python-format
+msgid "Todas las categorías (%(total)s)"
+msgstr "All categories (%(total)s)"
+
+#, python-format
+msgid "%(total)s canal"
+msgid_plural "%(total)s canales"
+msgstr[0] "%(total)s channel"
+msgstr[1] "%(total)s channels"
+
+msgid "Nuevo creador"
+msgstr "New creator"
+
+msgid "Canal"
+msgstr "Channel"
+
+msgid "Guardar"
+msgstr "Save"
+
+msgid "Cancelar"
+msgstr "Cancel"
+
+#, python-format
+msgid "Creador de %(nombre)s"
+msgstr "Creator of %(nombre)s"
+
+msgid "Todavía no hay canales en esta plataforma."
+msgstr "There are no channels on this platform yet."
+
+#, python-format
+msgid "Canales que emiten en %(plataforma)s"
+msgstr "Channels streaming on %(plataforma)s"
+
+msgid "Canales de esta categoría"
+msgstr "Channels in this category"
+
+msgid "Todavía no hay canales en esta categoría."
+msgstr "There are no channels in this category yet."
+
+msgid "Portada"
+msgstr "Home"
+
+msgid ""
+"Descubre canales de streaming y creadores de contenido, ordenados por "
+"categoría y por las plataformas en las que emiten: Twitch, Kick, YouTube, "
+"TikTok Live y más."
+msgstr ""
+"Discover streaming channels and content creators, organised by category and "
+"by the platforms they stream on: Twitch, Kick, YouTube, TikTok Live and "
+"more."
+
+msgid "Ver canales"
+msgstr "See channels"
+
+msgid "Ver categorías"
+msgstr "See categories"
+
+msgid "Ver plataformas"
+msgstr "See platforms"
+
+msgid "Un canal destacado de cada categoría"
+msgstr "A featured channel from each category"
+
+msgid "En cada categoría mostramos el canal con más seguidores."
+msgstr "For each category we show the channel with the most followers."
+
+msgid ""
+"Todavía no hay canales. Añade categorías y canales desde la administración "
+"de Django."
+msgstr ""
+"There are no channels yet. Add categories and channels from the Django "
+"admin."
+
+msgid "Canales"
+msgstr "Channels"
+
+msgid ""
+"Elige un canal para ver su categoría y las plataformas en las que emite."
+msgstr "Choose a channel to see its category and the platforms it streams on."
+
+msgid "Resultados para «{q}» ({total})"
+msgstr "Results for “{q}” ({total})"
+
+msgid "Todos los canales ({total})"
+msgstr "All channels ({total})"
+
+msgid "Ningún canal coincide con la búsqueda."
+msgstr "No channel matches your search."
+
+msgid "No hay canales registrados todavía."
+msgstr "There are no channels yet."
+
+msgid "seguidores"
+msgstr "followers"
+
+msgid "Buscar canal"
+msgstr "Search channel"
+
+msgid "Escribe parte del nombre..."
+msgstr "Type part of the name..."
+
+msgid "Buscar"
+msgstr "Search"
+
+msgid "Añadir canal"
+msgstr "Add channel"
+
+#, python-format
+msgid "Resultados para «%(q)s» (%(total)s)"
+msgstr "Results for “%(q)s” (%(total)s)"
+
+#, python-format
+msgid "Todos los canales (%(total)s)"
+msgstr "All channels (%(total)s)"
+
+msgid "Idioma"
+msgstr "Language"
+
+msgid "Cambiar"
+msgstr "Change"
+
+msgid "Canales, categorías y plataformas de streaming en un solo sitio"
+msgstr "Streaming channels, categories and platforms in one place"
+
+msgid "Plataformas"
+msgstr "Platforms"
+
+msgid "Cerrar mensaje"
+msgstr "Close message"
+
+msgid "Sobre el proyecto"
+msgstr "About the project"
+
+msgid ""
+"Streamers United reúne creadores de contenido y los clasifica por categoría "
+"y por las plataformas en las que emiten."
+msgstr ""
+"Streamers United brings content creators together and sorts them by category"
+" and by the platforms they stream on."
+
+msgid "Explora"
+msgstr "Explore"
+
+msgid "Todos los canales"
+msgstr "All channels"
+
+msgid "Añadir un canal"
+msgstr "Add a channel"
+
+msgid "Todas las categorías"
+msgstr "All categories"
+
+msgid "Todas las plataformas"
+msgstr "All platforms"
+
+msgid "Nuevo canal"
+msgstr "New channel"
+
+#, python-format
+msgid "Editar %(nombre)s"
+msgstr "Edit %(nombre)s"
+
+#, python-format
+msgid "Editar «%(nombre)s»"
+msgstr "Edit “%(nombre)s”"
+
+msgid ""
+"¿Seguro que quieres borrar este canal? También se borrará su creador. Esta "
+"acción no se puede deshacer."
+msgstr ""
+"Are you sure you want to delete this channel? Its creator will be deleted "
+"too. This cannot be undone."
+
+msgid "Sí, borrar"
+msgstr "Yes, delete"
+
+#, python-format
+msgid "Borrar %(nombre)s"
+msgstr "Delete %(nombre)s"
+
+#, python-format
+msgid "Borrar «%(nombre)s»"
+msgstr "Delete “%(nombre)s”"
+
+msgid ""
+"Un mismo canal puede emitir en varias plataformas. Entra en una para ver "
+"quién emite en ella."
+msgstr ""
+"A channel can stream on several platforms. Open one to see who streams on "
+"it."
+
+msgid "No hay plataformas registradas todavía."
+msgstr "There are no platforms yet."
+
+#, python-format
+msgid "Todas las plataformas (%(total)s)"
+msgstr "All platforms (%(total)s)"
+
+msgid "Streamers United · Administración"
+msgstr "Streamers United · Administration"
+
+msgid "Gestión de contenidos"
+msgstr "Content management"
+
+msgid "Nº de canales"
+msgstr "No. of channels"
+
+msgid "Audiencia"
+msgstr "Audience"
+
+msgid "Poner a cero los seguidores de los canales seleccionados"
+msgstr "Reset followers of the selected channels to zero"
+
+#, python-format
+msgid "Se ha reiniciado %(total)d canal."
+msgid_plural "Se han reiniciado %(total)d canales."
+msgstr[0] "%(total)d channel has been reset."
+msgstr[1] "%(total)d channels have been reset."
+
+msgid "Nombre del canal"
+msgstr "Channel name"
+
+msgid "Descripción"
+msgstr "Description"
+
+msgid "Categoría principal"
+msgstr "Main category"
+
+msgid "Número aproximado de seguidores."
+msgstr "Approximate number of followers."
+
+msgid "Marca todas las que correspondan."
+msgstr "Tick all that apply."
+
+msgid "Elige una categoría"
+msgstr "Choose a category"
+
+msgid "Ya existe un canal con ese nombre."
+msgstr "A channel with that name already exists."
+
+msgid "Nombre del creador"
+msgstr "Creator name"
+
+msgid "Biografía"
+msgstr "Biography"
+
+#, python-format
+msgid "El canal «%(nombre)s» se ha creado correctamente."
+msgstr "The channel “%(nombre)s” has been created."
+
+#, python-format
+msgid "Los cambios en «%(nombre)s» se han guardado."
+msgstr "Your changes to “%(nombre)s” have been saved."
+
+msgid "El canal se ha eliminado."
+msgstr "The channel has been deleted."
+
+#, python-format
+msgid "Se ha añadido a %(nombre)s como creador del canal."
+msgstr "%(nombre)s has been added as the channel creator."
+
+#, python-format
+msgid "Los datos de %(nombre)s se han guardado."
+msgstr "%(nombre)s’s details have been saved."
+
+msgid "Español"
+msgstr "Spanish"
+
+msgid "Inglés"
+msgstr "English"
+
+msgid "Tu cuenta"
+msgstr "Your account"
+
+#, python-format
+msgid "Has iniciado sesión como %(usuario)s."
+msgstr "Logged in as %(usuario)s."
+
+msgid "Cerrar sesión"
+msgstr "Log out"
+
+msgid "Inicia sesión para añadir o editar canales."
+msgstr "Log in to add or edit channels."
+
+msgid "Iniciar sesión"
+msgstr "Log in"
+
+msgid ""
+"Para añadir, editar o borrar canales necesitas una cuenta con permisos."
+msgstr "You need an account with permissions to add, edit or delete channels."
+
+msgid "Entrar"
+msgstr "Log in"
+
+msgid "Siguiendo"
+msgstr "Following"

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block titulo %}{% blocktranslate with nombre=canal.nombre %}Creador de {{ nombre }}{% endblocktranslate %} | Streamers United{% endblock %}
+
+{% block contenido %}
+<section>
+    <h1>{% if object %}{% translate "Editar creador" %}{% else %}{% translate "Nuevo creador" %}{% endif %}</h1>
+    <p class="intro">{% translate "Canal" %}: <a href="{% url 'canal_detail' canal.pk %}">{{ canal.nombre }}</a></p>
+    <form class="formulario" method="post" novalidate>
+        {% csrf_token %}
+        {% include "includes/campos_formulario.html" %}
+        <p>
+            <button type="submit" class="boton">{% translate "Guardar" %}</button>
+            <a class="boton boton-secundario" href="{% url 'canal_detail' canal.pk %}">{% translate "Cancelar" %}</a>
+        </p>
+    </form>
+</section>
+{% endblock %}

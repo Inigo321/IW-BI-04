@@ -1,0 +1,66 @@
+/* Colores del panel de administración (sobrescribe las variables de Django) */
+/* Solo en modo claro: el modo oscuro de Django se queda como está */
+html[data-theme="light"] {
+    --primary: #3b2f9e;
+    --secondary: #2a2273;
+    --accent: #ffd166;
+    --primary-fg: #ffffff;
+    --header-color: #d9d5f7;
+    --header-branding-color: #ffffff;
+    --header-bg: #1d1b3a;
+    --header-link-color: #ffffff;
+    --breadcrumbs-bg: #3b2f9e;
+    --link-fg: #3b2f9e;
+    --link-hover-color: #1d1b3a;
+    --link-selected-fg: #2a2273;
+    --button-bg: #3b2f9e;
+    --button-hover-bg: #2a2273;
+    --default-button-bg: #e5384f;
+    --default-button-hover-bg: #b3172c;
+    --selected-row: #eceef6;
+}
+
+@media (prefers-color-scheme: light) {
+    html[data-theme="auto"] {
+        --primary: #3b2f9e;
+        --secondary: #2a2273;
+        --accent: #ffd166;
+        --primary-fg: #ffffff;
+        --header-color: #d9d5f7;
+        --header-branding-color: #ffffff;
+        --header-bg: #1d1b3a;
+        --header-link-color: #ffffff;
+        --breadcrumbs-bg: #3b2f9e;
+        --link-fg: #3b2f9e;
+        --link-hover-color: #1d1b3a;
+        --link-selected-fg: #2a2273;
+        --button-bg: #3b2f9e;
+        --button-hover-bg: #2a2273;
+        --default-button-bg: #e5384f;
+        --default-button-hover-bg: #b3172c;
+        --selected-row: #eceef6;
+    }
+}
+
+#site-name a,
+#site-name a:link,
+#site-name a:visited {
+    color: #ffffff;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: bold;
+}
+
+#site-name .directo {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: #e5384f;
+}
+
+#footer {
+    padding: 15px 40px;
+    color: #5d5f7e;
+    font-size: 12px;
+}

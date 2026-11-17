@@ -1,9 +1,10 @@
 {% extends "base_listado.html" %}
+{% load i18n %}
 
-{% block titulo %}Categorías | Streamers United{% endblock %}
-{% block encabezado %}Categorías{% endblock %}
-{% block intro %}<p class="intro">Gaming, charla, música, cocina, deportes... Entra en una categoría para ver sus canales.</p>{% endblock %}
-{% block subtitulo %}Todas las categorías ({{ categoria_list|length }}){% endblock %}
+{% block titulo %}{% translate "Categorías" %} | Streamers United{% endblock %}
+{% block encabezado %}{% translate "Categorías" %}{% endblock %}
+{% block intro %}<p class="intro">{% translate "Gaming, charla, música, cocina, deportes... Entra en una categoría para ver sus canales." %}</p>{% endblock %}
+{% block subtitulo %}{% with total=categoria_list|length %}{% blocktranslate %}Todas las categorías ({{ total }}){% endblocktranslate %}{% endwith %}{% endblock %}
 
 {% block elementos %}
 {% if categoria_list %}
@@ -12,13 +13,11 @@
     <li class="tarjeta-simple">
         <h3><a href="{% url 'categoria_detail' categoria.pk %}">{{ categoria.nombre }}</a></h3>
         <p class="descripcion">{{ categoria.descripcion|truncatewords:15 }}</p>
-        {% with total=categoria.canales.count %}
-        <p><span class="etiqueta">{{ total }} canal{{ total|pluralize:"es" }}</span></p>
-        {% endwith %}
+        <p><span class="etiqueta">{% blocktranslate count total=categoria.num_canales %}{{ total }} canal{% plural %}{{ total }} canales{% endblocktranslate %}</span></p>
     </li>
     {% endfor %}
 </ul>
 {% else %}
-<p class="vacio">No hay categorías registradas todavía.</p>
+<p class="vacio">{% translate "No hay categorías registradas todavía." %}</p>
 {% endif %}
 {% endblock %}
